@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Confetti from 'react-confetti';
+import suitcaseImg from './assets/suitcase.png';
 import './Game.css';
 
 const CASE_VALUES = [
@@ -37,6 +38,8 @@ const Game = () => {
   const [offer, setOffer] = useState(null);
   const [gameOver, setGameOver] = useState(false);
   const [acceptedOffer, setAcceptedOffer] = useState(null);
+  const [offerTimer, setOfferTimer] = useState(10);
+  const [showInstruction, setShowInstruction] = useState(true);
 
   // For confetti sizing
   const [dimensions, setDimensions] = React.useState({ width: window.innerWidth, height: window.innerHeight });
@@ -46,9 +49,30 @@ const Game = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Timer for banker offer
+  React.useEffect(() => {
+    let timer;
+    if (offer !== null && !gameOver) {
+      setOfferTimer(10);
+      timer = setInterval(() => {
+        setOfferTimer((prev) => {
+          if (prev <= 1) {
+            clearInterval(timer);
+            handleDecline();
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+    return () => clearInterval(timer);
+    // eslint-disable-next-line
+  }, [offer, gameOver]);
+
   const handleCaseClick = (idx) => {
     if (playerCase === null) {
       setPlayerCase(idx);
+      setShowInstruction(false);
     } else if (!opened.includes(idx) && idx !== playerCase && !gameOver && offer === null) {
       setOpened([...opened, idx]);
     }
@@ -69,6 +93,7 @@ const Game = () => {
   const handleAccept = () => {
     setAcceptedOffer(offer);
     setGameOver(true);
+    setOffer(null);
   };
 
   const handleDecline = () => {
@@ -88,14 +113,26 @@ const Game = () => {
     setOffer(null);
     setGameOver(false);
     setAcceptedOffer(null);
+    setShowInstruction(true);
   };
 
   return (
     <div className="game-container">
       {acceptedOffer && <Confetti width={dimensions.width} height={dimensions.height} numberOfPieces={350} recycle={false} />}
       <h1>Deal or No Deal</h1>
+      {showInstruction && playerCase === null && (
+        <div className="game-instructions">
+          <strong>Instructions:</strong> Choose the case you believe contains the <span style={{color:'#ffd700'}}>$1,000,000</span> prize. You'll keep this case until the end unless you accept a deal!
+        </div>
+      )}
       {playerCase === null ? (
-        <div className="choose-case">Choose your case!</div>
+        <div className="choose-case-tooltip-wrapper">
+          <div className="choose-case choose-million">Choose your million dollar case
+            <span className="tooltip-text">
+              Pick the case you believe contains the $1,000,000 prize. You'll keep this case until the end unless you accept a deal!
+            </span>
+          </div>
+        </div>
       ) : (
         <div className="player-case">Your case: <span className="case-number">{playerCase + 1}</span></div>
       )}
@@ -110,7 +147,7 @@ const Game = () => {
           >
             {!opened.includes(idx) ? (
               <span className="suitcase-wrapper">
-                <div className="suitcase-placeholder">💼</div>
+                <img src={suitcaseImg} alt="Suitcase" className="suitcase-img" />
                 <span className="case-label">{idx + 1}</span>
               </span>
             ) : (
@@ -127,6 +164,7 @@ const Game = () => {
       {offer !== null && !gameOver && (
         <div className="banker-offer">
           <div className="offer-text">Banker's Offer: <span className="offer-value">${offer.toLocaleString()}</span></div>
+          <div className="offer-timer">Time left: <span className="timer-value">{offerTimer}</span> seconds</div>
           <button className="accept-btn" onClick={handleAccept}>Deal</button>
           <button className="decline-btn" onClick={handleDecline}>No Deal</button>
         </div>
