@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/deal-or-no-deal/static/css/main.c9dff29c.css",
+    "main.css": "/deal-or-no-deal/static/css/main.0c592cbd.css",
     "main.js": "/deal-or-no-deal/static/js/main.a363e526.js",
     "static/js/453.09c4b4a3.chunk.js": "/deal-or-no-deal/static/js/453.09c4b4a3.chunk.js",
     "index.html": "/deal-or-no-deal/index.html",
-    "main.c9dff29c.css.map": "/deal-or-no-deal/static/css/main.c9dff29c.css.map",
+    "main.0c592cbd.css.map": "/deal-or-no-deal/static/css/main.0c592cbd.css.map",
     "main.a363e526.js.map": "/deal-or-no-deal/static/js/main.a363e526.js.map",
     "453.09c4b4a3.chunk.js.map": "/deal-or-no-deal/static/js/453.09c4b4a3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c9dff29c.css",
+    "static/css/main.0c592cbd.css",
     "static/js/main.a363e526.js"
   ]
 }
