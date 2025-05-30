@@ -1,0 +1,224 @@
+.game-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 32px;
+  background: #1a1a2e;
+  color: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  text-align: center;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+}
+
+.choose-case {
+  font-size: 1.3rem;
+  margin-bottom: 18px;
+  color: #ffd700;
+}
+
+.player-case {
+  font-size: 1.1rem;
+  margin-bottom: 18px;
+  color: #00f2fe;
+}
+
+.case-number {
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.cases-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 12px;
+  margin: 24px 0 18px 0;
+  justify-items: center;
+}
+
+.case-btn {
+  width: 54px;
+  height: 54px;
+  background: linear-gradient(145deg, #23234b 60%, #393975 100%);
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s, border 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  position: relative;
+  overflow: visible;
+}
+.case-btn.player {
+  border: 2px solid #00f2fe;
+  background: linear-gradient(145deg, #23234b 60%, #00f2fe 100%);
+  color: #fff;
+}
+.case-btn.opened {
+  background: #222;
+  color: #ffd700;
+  border: 2px solid #ffd700;
+  cursor: default;
+  transform: scale(0.98);
+}
+.case-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.values-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 18px 0 24px 0;
+}
+.values-list span {
+  background: #23234b;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin: 2px 0;
+  min-width: 80px;
+  text-align: center;
+  transition: background 0.2s, color 0.2s;
+}
+.values-list .strikethrough {
+  text-decoration: line-through;
+  color: #888;
+  background: #222;
+}
+.values-list .highlight {
+  background: #ffd700;
+  color: #23234b;
+  font-weight: bold;
+}
+
+.banker-offer {
+  margin: 28px 0 18px 0;
+  background: #23234b;
+  padding: 18px 0 12px 0;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+.offer-text {
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+  color: #ffd700;
+}
+.offer-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #00f2fe;
+}
+.accept-btn, .decline-btn, .reveal-btn {
+  margin: 0 10px;
+  padding: 8px 22px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s, color 0.2s;
+}
+.accept-btn {
+  background: #00f2fe;
+  color: #23234b;
+}
+.decline-btn {
+  background: #ffd700;
+  color: #23234b;
+}
+.reveal-btn {
+  background: #393975;
+  color: #fff;
+  margin-top: 18px;
+}
+.accept-btn:hover {
+  background: #00c3c3;
+}
+.decline-btn:hover {
+  background: #e6c200;
+}
+.reveal-btn:hover {
+  background: #23234b;
+}
+
+.game-over {
+  margin-top: 32px;
+  font-size: 1.3rem;
+}
+.final-value {
+  font-size: 1.6rem;
+  color: #ffd700;
+  font-weight: bold;
+  margin-left: 8px;
+}
+
+.picks-remaining {
+  font-size: 1.15rem;
+  margin-bottom: 12px;
+  color: #ffd700;
+  background: #23234b;
+  display: inline-block;
+  padding: 6px 18px;
+  border-radius: 8px;
+  font-weight: 500;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+}
+.picks-number {
+  font-weight: bold;
+  color: #00f2fe;
+  margin-left: 6px;
+}
+
+.suitcase-wrapper {
+  position: relative;
+  display: inline-block;
+}
+.suitcase-img {
+  width: 48px;
+  height: 48px;
+  display: block;
+  margin: 0 auto;
+}
+.case-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #23234b;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-shadow: 1px 1px 4px #fff, 0 0 2px #fff;
+  pointer-events: none;
+}
+.case-value {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #ffd700;
+  display: block;
+  margin: 0 auto;
+}
+
+.pop-open {
+  animation: popOpen 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+@keyframes popOpen {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  60% {
+    transform: scale(1.25) rotate(-8deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+} 
